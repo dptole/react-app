@@ -1,0 +1,25 @@
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto 40px;
+  overflow: auto;
+}
+
+.panel {
+  margin: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.btn + .btn {
+  margin-left: 10px;
+}
