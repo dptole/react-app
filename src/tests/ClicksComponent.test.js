@@ -2,6 +2,8 @@ import React from 'react'
 import { render, fireEvent, wait } from '@testing-library/react'
 import AppComponent from '../components/AppComponent'
 
+const CLICK_ASYNC_WAIT = 30e3
+
 describe('ClicksComponent', () => {
   test('should click button "Click me" twice', async () => {
     const { container, getByText } = render(<AppComponent />)
@@ -20,7 +22,7 @@ describe('ClicksComponent', () => {
     await fireEvent.click(button_click_async)
 
     expect(container.innerHTML).toMatch('Adding...')
-  })
+  }, CLICK_ASYNC_WAIT)
 
   test('should click button "Click me (async)" and wait', async () => {
     const { container, getByText } = render(<AppComponent />)
@@ -31,7 +33,7 @@ describe('ClicksComponent', () => {
     expect(container.innerHTML).toMatch('Adding...')
 
     await wait(() => expect(container.innerHTML).toMatch('You clicked once'))
-  })
+  }, CLICK_ASYNC_WAIT)
 
   test('should max out on "Click me"', async () => {
     const { container, getByText } = render(<AppComponent />)
@@ -71,7 +73,7 @@ describe('ClicksComponent', () => {
     await wait(() => expect(container.innerHTML).toMatch('Too many clicks!'))
 
     expect(container.innerHTML).toMatch('Restart')
-  })
+  }, CLICK_ASYNC_WAIT)
 
   test('should max out clicking "Click me" and then restart"', async () => {
     const { container, getByText } = render(<AppComponent />)
