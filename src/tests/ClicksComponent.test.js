@@ -3,57 +3,51 @@ import { render, fireEvent, wait } from '@testing-library/react'
 import AppComponent from '../components/AppComponent'
 
 describe('ClicksComponent', () => {
-  test('should click button "Click me" twice', () => {
+  test('should click button "Click me" twice', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click = getByText('Click me')
 
-    fireEvent.click(getByText('Click me'))
-    fireEvent.click(getByText('Click me'))
+    await fireEvent.click(button_click)
+    await fireEvent.click(button_click)
 
     expect(container.innerHTML).toMatch('You clicked 2 times')
   })
 
-  test('should click button "Click me (async)" and see "Adding..."', () => {
+  test('should click button "Click me (async)" and see "Adding..."', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click_async = getByText('Click me (async)')
 
-    fireEvent.click(getByText('Click me (async)'))
+    await fireEvent.click(button_click_async)
 
     expect(container.innerHTML).toMatch('Adding...')
   })
 
   test('should click button "Click me (async)" and wait', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click_async = getByText('Click me (async)')
 
-    fireEvent.click(getByText('Click me (async)'))
+    await fireEvent.click(button_click_async)
 
     expect(container.innerHTML).toMatch('Adding...')
 
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 1 time'))
+    await wait(() => expect(container.innerHTML).toMatch('You clicked once'))
   })
 
-  test('should max out on "Click me"', () => {
+  test('should max out on "Click me"', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click = getByText('Click me')
 
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 1 time')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 2 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 3 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 4 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 5 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 6 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 7 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 8 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 9 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 10 times')
-    fireEvent.click(getByText('Click me'))
+    await fireEvent.click(button_click)
+    expect(container.innerHTML).toMatch('You clicked once')
+
+    let i = 2
+    while(i < 11) {
+      await fireEvent.click(button_click)
+      expect(container.innerHTML).toMatch(`You clicked ${i} times`)
+      i++
+    }
+
+    await fireEvent.click(button_click)
     expect(container.innerHTML).toMatch('Too many clicks!')
 
     expect(container.innerHTML).toMatch('Restart')
@@ -61,72 +55,44 @@ describe('ClicksComponent', () => {
 
   test('should max out on "Click me (async)"', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click_async = getByText('Click me (async)')
 
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 1 time'))
+    await fireEvent.click(button_click_async)
+    await wait(() => expect(container.innerHTML).toMatch('You clicked once'))
 
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 2 times'))
+    let i = 2
+    while(i < 11) {
+      await fireEvent.click(button_click_async)
+      await wait(() => expect(container.innerHTML).toMatch(`You clicked ${i} times`))
+      i++
+    }
 
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 3 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 4 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 5 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 6 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 7 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 8 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 9 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
-    await wait(() => expect(container.innerHTML).toMatch('You clicked 10 times'))
-
-    fireEvent.click(getByText('Click me (async)'))
+    await fireEvent.click(button_click_async)
     await wait(() => expect(container.innerHTML).toMatch('Too many clicks!'))
 
     expect(container.innerHTML).toMatch('Restart')
   })
 
-  test('should max out and then restart"', () => {
+  test('should max out clicking "Click me" and then restart"', async () => {
     const { container, getByText } = render(<AppComponent />)
+    const button_click = getByText('Click me')
 
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 1 time')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 2 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 3 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 4 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 5 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 6 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 7 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 8 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 9 times')
-    fireEvent.click(getByText('Click me'))
-    expect(container.innerHTML).toMatch('You clicked 10 times')
-    fireEvent.click(getByText('Click me'))
+    await fireEvent.click(button_click)
+    expect(container.innerHTML).toMatch('You clicked once')
+
+    let i = 2
+    while(i < 11) {
+      await fireEvent.click(button_click)
+      expect(container.innerHTML).toMatch(`You clicked ${i} times`)
+      i++
+    }
+
+    await fireEvent.click(button_click)
     expect(container.innerHTML).toMatch('Too many clicks!')
 
     expect(container.innerHTML).toMatch('Restart')
 
-    fireEvent.click(getByText('Restart'))
+    await fireEvent.click(getByText('Restart'))
 
     expect(container.innerHTML).toMatch('You have never clicked')
   })

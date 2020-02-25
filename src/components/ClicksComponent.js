@@ -1,16 +1,17 @@
 import React from 'react'
-import useClicks from '../hooks/ClicksHook'
+import useClicksHook from '../hooks/ClicksHook'
 
 const ClicksComponent = () => {
   const [
     {count, thinking, visible},
     {increaseAsync, increase, restart}
-  ] = useClicks()
+  ] = useClicksHook()
 
-  const amount = count === 1 ? 'time' : 'times'
   const title = count === 0
     ? 'You have never clicked'
-    : `You clicked ${count} ${amount}`
+    : count === 1
+    ? 'You clicked once'
+    : `You clicked ${count} times`
 
   if(visible === false)
     return (
