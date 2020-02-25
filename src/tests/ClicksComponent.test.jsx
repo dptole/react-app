@@ -1,12 +1,12 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@testing-library/react'
-import AppComponent from '../components/AppComponent'
+import ClicksComponent from '../components/ClicksComponent'
 
 const CLICK_ASYNC_WAIT = 30e3
 
 describe('ClicksComponent', () => {
   test('should click button "Click me" twice', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click = getByText('Click me')
 
     await fireEvent.click(button_click)
@@ -16,7 +16,7 @@ describe('ClicksComponent', () => {
   })
 
   test('should click button "Click me (async)" and see "Adding..."', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click_async = getByText('Click me (async)')
 
     await fireEvent.click(button_click_async)
@@ -25,7 +25,7 @@ describe('ClicksComponent', () => {
   }, CLICK_ASYNC_WAIT)
 
   test('should click button "Click me (async)" and wait', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click_async = getByText('Click me (async)')
 
     await fireEvent.click(button_click_async)
@@ -36,7 +36,7 @@ describe('ClicksComponent', () => {
   }, CLICK_ASYNC_WAIT)
 
   test('should max out on "Click me"', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click = getByText('Click me')
 
     await fireEvent.click(button_click)
@@ -56,7 +56,7 @@ describe('ClicksComponent', () => {
   })
 
   test('should max out on "Click me (async)"', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click_async = getByText('Click me (async)')
 
     await fireEvent.click(button_click_async)
@@ -76,7 +76,7 @@ describe('ClicksComponent', () => {
   }, CLICK_ASYNC_WAIT)
 
   test('should max out clicking "Click me" and then restart"', async () => {
-    const { container, getByText } = render(<AppComponent />)
+    const { container, getByText } = render(<ClicksComponent />)
     const button_click = getByText('Click me')
 
     await fireEvent.click(button_click)

@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom'
-import './App.css'
+import '../assets/css/App.css'
 import ClicksComponent from './ClicksComponent'
+import IMDBComponent from './IMDBComponent'
+import HomeComponent from './HomeComponent'
 
 const AppComponent = () => {
   return (
@@ -31,7 +33,9 @@ const AppComponent = () => {
 
       <div className="container">
         <Switch>
-          <Route exact path="/react-app" component={ClicksComponent} />
+          <Route exact path="/react-app" component={HomeComponent} />
+          <Route path="/react-app/clicks" component={ClicksComponent} />
+          <Route path="/react-app/imdb" component={IMDBComponent} />
 
           <Redirect from="*" to="/react-app" />
         </Switch>

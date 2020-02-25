@@ -1,13 +1,15 @@
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import AppComponent from '../components/AppComponent'
 
 describe('AppComponent', () => {
   test('should check for existance of "Click me (async)" and "Click me" buttons', () => {
     const { container } = render(<AppComponent />)
 
-    expect(container.innerHTML).toMatch('You have never clicked')
-    expect(container.innerHTML).toMatch('Click me (async)')
-    expect(container.innerHTML).toMatch('Click me')
+    expect(container.innerHTML).toMatch('Small apps')
+    expect(container.innerHTML).toMatch('Clicks')
+
+    expect(container.innerHTML).toMatch('Public APIs')
+    expect(container.innerHTML).toMatch('IMDB')
   })
 })

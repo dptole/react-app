@@ -25,7 +25,6 @@ const useClicksHook = () => {
       document.title = 'Maxed out!'
       setVisible(false)
     }
-
     // eslint-disable-next-line
   }, [count])
 
