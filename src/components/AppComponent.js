@@ -1,8 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom'
-import Clicks from './hooks/clicks'
+import './App.css'
+import ClicksComponent from './ClicksComponent'
 
-const App = () => {
+const AppComponent = () => {
   return (
     <BrowserRouter>
       <nav className="navbar navbar-default">
@@ -30,7 +31,7 @@ const App = () => {
 
       <div className="container">
         <Switch>
-          <Route exact path="/react-app" component={Clicks} />
+          <Route exact path="/react-app" component={ClicksComponent} />
 
           <Redirect from="*" to="/react-app" />
         </Switch>
@@ -47,4 +48,4 @@ const App = () => {
   )
 }
 
-export default App
+export default AppComponent
