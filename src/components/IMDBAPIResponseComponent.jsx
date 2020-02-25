@@ -8,10 +8,6 @@ const IMDBAPIResponseComponent = props => {
     { doPaginatedSearch: onPaginatedSearch, newSearch: onNewSearch }
   ] = props.hook
 
-
-//onNewSearch={newSearch} onPaginatedSearch={doPaginatedSearch}
-
-
   if(output) {
     if(isSuccessResponse(output))
       return successResponse(output, page, searching, onPaginatedSearch, onNewSearch)
@@ -97,13 +93,13 @@ const successResponse = (response, page, searching, onPaginatedSearch, onNewSear
       <div className="form-group">
         <h1>Success!</h1>
 
-        <span>Results: {response.totalResults}</span>
+        <span>Results: <span id="imdb_total_result">{response.totalResults}</span></span>
 
         {pagination}
 
         <div>
           {response.Search.map((result, index) =>
-            <div key={result.imdbID}>
+            <div className={'imdb-result imdb-result-' + index} key={result.imdbID}>
               <hr />
 
               <div>
