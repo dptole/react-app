@@ -1,3 +1,3 @@
 # Code of conduct
 
-Treat other how you wanted to be treated.
+Treat others how you wanted to be treated.
