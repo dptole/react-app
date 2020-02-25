@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { initModel, createActions } from '../model/clicks'
 
 const Clicks = () => {
