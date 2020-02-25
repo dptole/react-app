@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "13.8"
 before_install:
-  - npm i
+  - npm i -D
 script:
   - npm t -- --coverage --watchAll=false
 after_script:
