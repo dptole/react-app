@@ -8,6 +8,7 @@ describe('IMDBComponent', () => {
 
     expect(container.innerHTML).toMatch('IMDB Search')
     expect(container.innerHTML).toMatch('API Key')
+    expect(container.innerHTML).toMatch('http://www.omdbapi.com/apikey.aspx')
     expect(container.innerHTML).toMatch('Search')
     expect(container.innerHTML).toMatch('Submit')
   })

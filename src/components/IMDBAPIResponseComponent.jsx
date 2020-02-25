@@ -125,6 +125,9 @@ const successResponse = (response, page, searching, onPaginatedSearch, onNewSear
             </div>
           )}
         </div>
+
+        {pagination}
+
       </div>
     </div>
   )

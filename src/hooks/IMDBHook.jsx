@@ -41,7 +41,7 @@ const useIMDBHook = () => {
   }
 
   const fetchMovie = async (apikey, search, page) => {
-    const url = `http://www.omdbapi.com/?apikey=${apikey}&s=${search}&page=${page}`
+    const url = `https://www.omdbapi.com/?apikey=${apikey}&s=${search}&page=${page}`
 
     await sleep(1)
 

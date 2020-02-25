@@ -14,6 +14,11 @@ const IMDBFormComponent = props => {
       <div className="form-group">
         <label>API Key:</label>
         <input disabled={searching} value={apikey} onChange={updateAPIKey} className="form-control" autoFocus={true} type="text" />
+
+        <blockquote>
+          <small>You must go to <a target="_blank" rel="noopener noreferrer" href="http://www.omdbapi.com/apikey.aspx">http://www.omdbapi.com/apikey.aspx</a> to generate your API key.</small>
+        </blockquote>
+
       </div>
 
       <div className="form-group">
