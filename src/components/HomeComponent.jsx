@@ -21,6 +21,9 @@ const HomeComponent = () => (
         <li>
           <Link to="/react-app/mal">MyAnimeList</Link>
         </li>
+        <li>
+          <Link to="/react-app/progq">Programming Quotes</Link>
+        </li>
       </ul>
     </div>
   </div>

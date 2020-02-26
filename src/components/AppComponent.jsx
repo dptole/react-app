@@ -5,6 +5,7 @@ import ClicksComponent from './ClicksComponent'
 import IMDBComponent from './IMDBComponent'
 import HomeComponent from './HomeComponent'
 import MyAnimeListComponent from './MyAnimeListComponent'
+import ProgrammingQuotesComponent from './ProgrammingQuotesComponent'
 
 const AppComponent = () => {
   return (
@@ -38,6 +39,7 @@ const AppComponent = () => {
           <Route path="/react-app/clicks" component={ClicksComponent} />
           <Route path="/react-app/imdb" component={IMDBComponent} />
           <Route path="/react-app/mal" component={MyAnimeListComponent} />
+          <Route path="/react-app/progq" component={ProgrammingQuotesComponent} />
 
           <Redirect from="*" to="/react-app" />
         </Switch>
