@@ -11,7 +11,7 @@ const IMDBFormComponent = props => {
     <form hidden={isSuccessResponse(output)} onSubmit={doSearch}>
       <h1 className="title">IMDB Search</h1>
 
-      <h5>IMDb is the world's most popular and authoritative source for movie, TV and celebrity content. Find ratings and reviews for the newest movie and TV shows. Get personalized recommendations, and learn where to watch across hundreds of streaming providers.</h5>
+      <h5><a rel="noreferrer noopener" target="_blank" href="https://www.imdb.com">IMDb</a> is the world's most popular and authoritative source for movie, TV and celebrity content. Find ratings and reviews for the newest movie and TV shows. Get personalized recommendations, and learn where to watch across hundreds of streaming providers.</h5>
 
       <div className="form-group">
         <label>API Key:</label>

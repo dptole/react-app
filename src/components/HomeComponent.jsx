@@ -16,7 +16,10 @@ const HomeComponent = () => (
       <h1>Public APIs</h1>
       <ul>
         <li>
-          <Link to="/react-app/imdb">IMDB</Link>
+          <Link to="/react-app/imdb">Open Movie Database</Link>
+        </li>
+        <li>
+          <Link to="/react-app/mal">MyAnimeList</Link>
         </li>
       </ul>
     </div>

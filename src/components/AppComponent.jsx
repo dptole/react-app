@@ -4,6 +4,7 @@ import '../assets/css/App.css'
 import ClicksComponent from './ClicksComponent'
 import IMDBComponent from './IMDBComponent'
 import HomeComponent from './HomeComponent'
+import MyAnimeListComponent from './MyAnimeListComponent'
 
 const AppComponent = () => {
   return (
@@ -36,6 +37,7 @@ const AppComponent = () => {
           <Route exact path="/react-app" component={HomeComponent} />
           <Route path="/react-app/clicks" component={ClicksComponent} />
           <Route path="/react-app/imdb" component={IMDBComponent} />
+          <Route path="/react-app/mal" component={MyAnimeListComponent} />
 
           <Redirect from="*" to="/react-app" />
         </Switch>

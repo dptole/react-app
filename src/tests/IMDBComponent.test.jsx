@@ -7,7 +7,7 @@ const SEARCHES_WAIT = 30e3
 
 describe('IMDBComponent', () => {
   test('should see an empty form', () => {
-    const { container, getByText } = render(<IMDBComponent />)
+    const { container } = render(<IMDBComponent />)
 
     expect(container.innerHTML).toMatch('IMDB Search')
     expect(container.innerHTML).toMatch('API Key')
@@ -23,8 +23,7 @@ describe('IMDBComponent', () => {
     await fireEvent.click(submit_button)
 
     await wait(() => expect(container.innerHTML).toMatch('Error!'))
-
-  })
+  }, SEARCHES_WAIT)
 
   test('should search for "jorker" and "bird"', async () => {
     const { container, getByText } = render(<IMDBComponent />)

@@ -1,16 +1,16 @@
 import React from 'react'
 
-const RESULTS_PER_PAGE = 10
+const RESULTS_PER_PAGE = 50
 
-const IMDBAPIResponseComponent = props => {
+const MyAnimeListResponseComponent = props => {
   const [
-    {page, output, searching},
+    {page, output, searching, search_type},
     { doPaginatedSearch: onPaginatedSearch, newSearch: onNewSearch }
   ] = props.hook
 
   if(output) {
     if(isSuccessResponse(output))
-      return successResponse(output, page, searching, onPaginatedSearch, onNewSearch)
+      return successResponse(output, search_type, page, searching, onPaginatedSearch, onNewSearch)
 
     else if(isErrorResponse(output))
 
@@ -26,12 +26,12 @@ const IMDBAPIResponseComponent = props => {
 }
 
 const isErrorResponse = response =>
-  response && response.Response === 'False'
+  response && Array.isArray(response.results) && response.results.length === 0
 
 const isSuccessResponse = response =>
-  response && response.Response === 'True'
+  response && Array.isArray(response.results) && response.results.length > 0
 
-const successResponse = (response, page, searching, onPaginatedSearch, onNewSearch) => {
+const successResponse = (response, search_type, page, searching, onPaginatedSearch, onNewSearch) => {
   if(searching)
     return (
       <div>
@@ -40,11 +40,12 @@ const successResponse = (response, page, searching, onPaginatedSearch, onNewSear
     )
 
   let pagination = null
+  let around_result = 0
   const result_no = (page - 1) * RESULTS_PER_PAGE
 
-  if(response.Search.length < response.totalResults) {
-    const total = parseInt(response.totalResults)
-    const pages = Array.from(Array(Math.ceil(total / RESULTS_PER_PAGE)))
+  if(response.last_page > 1) {
+    around_result = RESULTS_PER_PAGE * response.last_page
+    const pages = Array.from(Array(response.last_page - 1))
 
     const shouldPaginate = new_page =>
       new_page > 0 && new_page <= pages.length && new_page !== page
@@ -93,35 +94,35 @@ const successResponse = (response, page, searching, onPaginatedSearch, onNewSear
       <div className="form-group">
         <h1>Success!</h1>
 
-        <span>Results: <span id="imdb_total_result">{response.totalResults}</span></span>
+        <span>Results: around <span id="mal_around_result">{around_result}</span></span>
 
         {pagination}
 
         <div>
-          {response.Search.map((result, index) =>
-            <div className={'imdb-result imdb-result-' + index} key={result.imdbID}>
+          {response.results.map((result, index) =>
+            <div className={'mal-result mal-result-' + index} key={result.mal_id}>
               <hr />
 
               <div>
                 <label>
                   {result_no + index + 1}&ndash;
-                  <a href={'https://www.imdb.com/title/' + result.imdbID + '/'} target="_blank" rel="noopener noreferrer">{result.Title}</a>
+                  <a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a>
                 </label>
               </div>
 
-              <div><label>Year:</label> {result.Year}</div>
-              <div><label>Type:</label> {result.Type}</div>
-
               <div>
-                {result.Poster === 'N/A'
-                  ? null
-                  : (
-                      <a href={'https://www.imdb.com/title/' + result.imdbID + '/'} target="_blank" rel="noopener noreferrer">
-                        <img src={result.Poster} alt="Poster" />
-                      </a>
-                    )
-                }
+                <a href={result.url} target="_blank" rel="noopener noreferrer">
+                  <img src={result.image_url} alt="Poster" />
+                </a>
               </div>
+
+              <div><label>Score:</label> {result.score}</div>
+              {search_type === 'anime'
+                ? <div><label>Episodes:</label> {result.episodes}</div>
+                : <div><label>Chapters:</label> {result.chapters}</div>
+              }
+              <div><label>Type:</label> {result.type}</div>
+              <div><label>Synopsis:</label> {result.synopsis}</div>
             </div>
           )}
         </div>
@@ -141,5 +142,5 @@ const errorResponse = error => (
   </div>
 )
 
-export default IMDBAPIResponseComponent
+export default MyAnimeListResponseComponent
 export { isSuccessResponse }

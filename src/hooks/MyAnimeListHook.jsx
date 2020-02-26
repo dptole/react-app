@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react'
 
-const useIMDBHook = () => {
-  const [apikey, setAPIKey] = useState('')
+const useMyAnimeListHook = () => {
   const [search, setSearch] = useState('')
   const [searching, setSearching] = useState(false)
-  const [output, setOutput] = useState({})
+  const [search_type, setSearchType] = useState('manga')
   const [page, setPage] = useState(1)
-
-  const updateAPIKey = event =>
-    setAPIKey(event?.target?.value)
+  const [output, setOutput] = useState({})
 
   const updateSearch = event =>
     setSearch(event?.target?.value)
 
+  const doSearchManga = event => {
+    setSearchType('manga')
+    return doSearch(event)
+  }
+
+  const doSearchAnime = event => {
+    setSearchType('anime')
+    return doSearch(event)
+  }
   const doSearch = event => {
     event.preventDefault()
 
@@ -20,7 +26,6 @@ const useIMDBHook = () => {
       return false
 
     setSearching(true)
-    setOutput({})
 
     return true
   }
@@ -40,11 +45,9 @@ const useIMDBHook = () => {
     setOutput({})
   }
 
-  const fetchMovie = async (apikey, search, page) => {
+  const fetchResource = async (search, search_type) => {
     search = encodeURIComponent(search)
-    const url = `https://www.omdbapi.com/?apikey=${apikey}&s=${search}&page=${page}`
-
-    await sleep(1)
+    const url = `https://api.jikan.moe/v3/search/${search_type}?q=${search}&page=${page}`
 
     try {
       const response = await fetch(url, {mode: 'cors'})
@@ -59,14 +62,11 @@ const useIMDBHook = () => {
   }
 
   useEffect(() => {
-    searching && fetchMovie(apikey, search, page)
+    searching && fetchResource(search, search_type)
     // eslint-disable-next-line
   }, [searching])
 
-  return [{apikey, search, searching, output, page}, {updateAPIKey, updateSearch, doSearch, doPaginatedSearch, newSearch}]
+  return [{search, searching, search_type, output, page}, {doSearchAnime, doSearchManga, updateSearch, doPaginatedSearch, newSearch}]
 }
 
-const sleep = async seconds =>
-  await new Promise(r => setTimeout(r, seconds * 1e3))
-
-export default useIMDBHook
+export default useMyAnimeListHook
