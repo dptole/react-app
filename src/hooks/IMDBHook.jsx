@@ -54,7 +54,7 @@ const useIMDBHook = () => {
     } catch(error) {
       setSearching(false)
       setPage(1)
-      setOutput(error.message)
+      setOutput(error)
     }
   }
 

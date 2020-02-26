@@ -13,7 +13,6 @@ const MyAnimeListResponseComponent = props => {
       return successResponse(output, search_type, page, searching, onPaginatedSearch, onNewSearch)
 
     else if(isErrorResponse(output))
-
       return errorResponse(output)
 
     else if(Object.keys(output).length > 0)
@@ -30,6 +29,14 @@ const isErrorResponse = response =>
 
 const isSuccessResponse = response =>
   response && Array.isArray(response.results) && response.results.length > 0
+
+const errorResponse = error => (
+  <div className="form-group">
+    <h1>Error!</h1>
+
+    {error.message}
+  </div>
+)
 
 const successResponse = (response, search_type, page, searching, onPaginatedSearch, onNewSearch) => {
   if(searching)
@@ -133,14 +140,6 @@ const successResponse = (response, search_type, page, searching, onPaginatedSear
     </div>
   )
 }
-
-const errorResponse = error => (
-  <div className="form-group">
-    <h1>Error!</h1>
-
-    {error.Error}
-  </div>
-)
 
 export default MyAnimeListResponseComponent
 export { isSuccessResponse }

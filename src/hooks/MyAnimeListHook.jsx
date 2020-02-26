@@ -19,6 +19,7 @@ const useMyAnimeListHook = () => {
     setSearchType('anime')
     return doSearch(event)
   }
+
   const doSearch = event => {
     event.preventDefault()
 
@@ -57,7 +58,7 @@ const useMyAnimeListHook = () => {
     } catch(error) {
       setSearching(false)
       setPage(1)
-      setOutput(error.message)
+      setOutput(error)
     }
   }
 

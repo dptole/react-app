@@ -13,7 +13,6 @@ const IMDBAPIResponseComponent = props => {
       return successResponse(output, page, searching, onPaginatedSearch, onNewSearch)
 
     else if(isErrorResponse(output))
-
       return errorResponse(output)
 
     else if(Object.keys(output).length > 0)
@@ -30,6 +29,14 @@ const isErrorResponse = response =>
 
 const isSuccessResponse = response =>
   response && response.Response === 'True'
+
+const errorResponse = error => (
+  <div className="form-group">
+    <h1>Error!</h1>
+
+    {error.Error}
+  </div>
+)
 
 const successResponse = (response, page, searching, onPaginatedSearch, onNewSearch) => {
   if(searching)
@@ -132,14 +139,6 @@ const successResponse = (response, page, searching, onPaginatedSearch, onNewSear
     </div>
   )
 }
-
-const errorResponse = error => (
-  <div className="form-group">
-    <h1>Error!</h1>
-
-    {error.Error}
-  </div>
-)
 
 export default IMDBAPIResponseComponent
 export { isSuccessResponse }
