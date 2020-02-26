@@ -38,6 +38,7 @@ describe('IMDBComponent', () => {
     await wait(() => expect(container.innerHTML).toMatch('Error!'))
   }, SEARCHES_WAIT)
 
+  IMDB_API_KEY &&
   test('should search for "jorker" and "bird" and then "New search"', async () => {
     const { container, getByText } = render(<IMDBComponent />)
     const apikey_box = container.querySelector('input[type=text]#imdb_apikey')
@@ -75,6 +76,7 @@ describe('IMDBComponent', () => {
     expect(container.innerHTML).toMatch('Submit')
   }, SEARCHES_WAIT)
 
+  IMDB_API_KEY &&
   test('should search for "batman" and paginate', async () => {
     const { container, getByText } = render(<IMDBComponent />)
     const apikey_box = container.querySelector('input[type=text]#imdb_apikey')

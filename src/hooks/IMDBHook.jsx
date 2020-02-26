@@ -17,6 +17,7 @@ const useIMDBHook = () => {
     event.preventDefault()
 
     if(searching)
+      // istanbul ignore next
       return false
 
     setSearching(true)
@@ -27,6 +28,7 @@ const useIMDBHook = () => {
 
   const doPaginatedSearch = new_page => event => {
     if(searching)
+      // istanbul ignore next
       return false
 
     setPage(new_page)

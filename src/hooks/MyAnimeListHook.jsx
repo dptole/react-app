@@ -24,6 +24,7 @@ const useMyAnimeListHook = () => {
     event.preventDefault()
 
     if(searching)
+      // istanbul ignore next
       return false
 
     setSearching(true)
@@ -33,6 +34,7 @@ const useMyAnimeListHook = () => {
 
   const doPaginatedSearch = new_page => event => {
     if(searching)
+      // istanbul ignore next
       return false
 
     setPage(new_page)

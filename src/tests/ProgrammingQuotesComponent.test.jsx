@@ -24,7 +24,7 @@ describe('ProgrammingQuotesComponent', () => {
     expect(container.innerHTML).toMatch('Search for a quote')
   })
 
-  test('search for the first quote and another one', async () => {
+  test('should for the first quote and another one', async () => {
     const { container, getByText } = render(<ProgrammingQuotesComponent />)
     const submit_button = getByText('Search for a quote')
 
@@ -54,7 +54,7 @@ describe('ProgrammingQuotesComponent', () => {
     expect(first_quote_content).not.toBe(second_quote_content)
   })
 
-  test('search mock fetch to return a response that is an unknown error', async () => {
+  test('should mock fetch to return a response that is an unknown error', async () => {
     const { container, getByText } = render(<ProgrammingQuotesComponent />)
     const submit_button = getByText('Search for a quote')
 
@@ -67,7 +67,7 @@ describe('ProgrammingQuotesComponent', () => {
     expect(container.innerHTML).toMatch('Unknown error')
   })
 
-  test('search mock fetch to return a response that is an custom error', async () => {
+  test('should mock fetch to return a response that is an custom error', async () => {
     const { container, getByText } = render(<ProgrammingQuotesComponent />)
     const submit_button = getByText('Search for a quote')
 
@@ -78,6 +78,21 @@ describe('ProgrammingQuotesComponent', () => {
     await fireEvent.click(submit_button)
 
     expect(container.innerHTML).toMatch('Custom error message')
+  })
+
+  test('should run through all quotes', async () => {
+    const { container, getByText } = render(<ProgrammingQuotesComponent />)
+    const submit_button = getByText('Search for a quote')
+
+    await fireEvent.click(submit_button)
+
+    await wait(() => expect(container.innerHTML).toMatch('Another one'))
+
+    const another_submit_button = getByText('Another one')
+    for(let i = 1; i <= 501; i++)
+      await fireEvent.click(another_submit_button)
+
+    expect(container.innerHTML).toMatch('Searching...')
   })
 })
 

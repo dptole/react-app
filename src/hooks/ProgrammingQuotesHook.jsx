@@ -15,6 +15,7 @@ const useProgrammingQuotesHook = () => {
     }
 
     if(searching)
+      // istanbul ignore next
       return false
 
     setSearching(true)
@@ -25,7 +26,9 @@ const useProgrammingQuotesHook = () => {
   const selectOneQuote = async quotes => {
     const q = quotes.splice(quotes.length * Math.random() | 0, 1)
 
-    if(!q) return false
+    if(!q)
+      // istanbul ignore next
+      return false
 
     const [{en: content, author}] = q
 
@@ -37,11 +40,14 @@ const useProgrammingQuotesHook = () => {
       author_url
     })
 
+    setQuotes(quotes)
+
     return true
   }
 
   const fetchQuotes = async () => {
     if(quotes.length > 0)
+      // istanbul ignore next
       return await selectOneQuote(quotes)
 
     setQuote(false)
