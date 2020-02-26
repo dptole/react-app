@@ -40,24 +40,25 @@ const useProgrammingQuotesHook = () => {
     return true
   }
 
-  const fetchQuotes = () => {
+  const fetchQuotes = async () => {
     if(quotes.length > 0)
-      return selectOneQuote(quotes)
+      return await selectOneQuote(quotes)
 
     setQuote(false)
     setQuotes([])
     setError(false)
 
-    return fetch('https://programming-quotes-api.herokuapp.com/quotes/lang/en/').then(response =>
-      response.json()
-    ).then(json => {
+    try {
+      const response = await fetch('https://programming-quotes-api.herokuapp.com/quotes/lang/en/')
+      const json = await response.json()
       setQuotes(json)
       setSearching(false)
-      return selectOneQuote(json)
-    }).catch(error => {
+      return await selectOneQuote(json)
+    } catch(error) {
       setSearching(false)
-      setQuotes(error?.message || 'Unknown error')
-    })
+      setError(error?.message || 'Unknown error')
+      return false
+    }
   }
 
   useEffect(() => {

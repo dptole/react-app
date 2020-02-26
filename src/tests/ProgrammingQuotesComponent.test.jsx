@@ -2,6 +2,19 @@ import React from 'react'
 import { render, fireEvent, wait } from '@testing-library/react'
 import ProgrammingQuotesComponent from '../components/ProgrammingQuotesComponent'
 
+// this is just a little hack to silence a warning that we'll get until we
+// upgrade to 16.9: https://github.com/facebook/react/pull/14853
+// I'm using React 16.12 and its not yet upgraded
+const originalError = console.error
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return
+    }
+    originalError.call(console, ...args)
+  }
+})
+
 describe('ProgrammingQuotesComponent', () => {
   test('should see an empty form', () => {
     const { container } = render(<ProgrammingQuotesComponent />)
@@ -40,4 +53,34 @@ describe('ProgrammingQuotesComponent', () => {
 
     expect(first_quote_content).not.toBe(second_quote_content)
   })
+
+  test('search mock fetch to return a response that is an unknown error', async () => {
+    const { container, getByText } = render(<ProgrammingQuotesComponent />)
+    const submit_button = getByText('Search for a quote')
+
+    jest.spyOn(window, 'fetch').mockImplementationOnce(() =>
+      Promise.reject()
+    )
+
+    await fireEvent.click(submit_button)
+
+    expect(container.innerHTML).toMatch('Unknown error')
+  })
+
+  test('search mock fetch to return a response that is an custom error', async () => {
+    const { container, getByText } = render(<ProgrammingQuotesComponent />)
+    const submit_button = getByText('Search for a quote')
+
+    jest.spyOn(window, 'fetch').mockImplementationOnce(() =>
+      Promise.reject({message: 'Custom error message'})
+    )
+
+    await fireEvent.click(submit_button)
+
+    expect(container.innerHTML).toMatch('Custom error message')
+  })
+})
+
+afterAll(() => {
+  console.error = originalError
 })
