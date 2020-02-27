@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const useMyAnimeListHook = () => {
   const [search, setSearch] = useState('')
   const [searching, setSearching] = useState(false)
-  const [search_type, setSearchType] = useState('manga')
+  const [search_type, setSearchType] = useState(SEARCH_TYPE_MANGA)
   const [page, setPage] = useState(1)
   const [output, setOutput] = useState({})
 
@@ -11,7 +11,7 @@ const useMyAnimeListHook = () => {
     setSearch(event?.target?.value)
 
   const doSearchManga = event => {
-    setSearchType('manga')
+    setSearchType(SEARCH_TYPE_MANGA)
     return doSearch(event)
   }
 
@@ -71,5 +71,8 @@ const useMyAnimeListHook = () => {
 
   return [{search, searching, search_type, output, page}, {doSearchAnime, doSearchManga, updateSearch, doPaginatedSearch, newSearch}]
 }
+
+export const SEARCH_TYPE_ANIME = 'anime'
+export const SEARCH_TYPE_MANGA = 'manga'
 
 export default useMyAnimeListHook

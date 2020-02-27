@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ROUTES } from '../assets/utils/const'
 
 const HomeComponent = () => (
   <div>
@@ -7,7 +8,7 @@ const HomeComponent = () => (
       <h1>Small apps</h1>
       <ul>
         <li>
-          <Link to="/react-app/clicks">Clicks</Link>
+          <Link to={ROUTES.CLICKS}>Clicks</Link>
         </li>
       </ul>
     </div>
@@ -16,13 +17,13 @@ const HomeComponent = () => (
       <h1>Public APIs</h1>
       <ul>
         <li>
-          <Link to="/react-app/imdb">Open Movie Database</Link>
+          <Link to={ROUTES.IMDB}>Open Movie Database</Link>
         </li>
         <li>
-          <Link to="/react-app/mal">MyAnimeList</Link>
+          <Link to={ROUTES.MAL}>MyAnimeList</Link>
         </li>
         <li>
-          <Link to="/react-app/progq">Programming Quotes</Link>
+          <Link to={ROUTES.PROGQ}>Programming Quotes</Link>
         </li>
       </ul>
     </div>

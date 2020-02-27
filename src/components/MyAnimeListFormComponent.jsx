@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { isSuccessResponse } from './MyAnimeListResponseComponent'
+import { SEARCH_TYPE_ANIME, SEARCH_TYPE_MANGA } from '../hooks/MyAnimeListHook'
 
 const MyAnimeListFormComponent = props => {
   const [
@@ -35,7 +36,7 @@ MyAnimeListFormComponent.propTypes = {
   hook: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.shape({
-        search_type: PropTypes.oneOf(['manga', 'anime']),
+        search_type: PropTypes.oneOf([SEARCH_TYPE_ANIME, SEARCH_TYPE_MANGA]),
         search: PropTypes.string,
         output: PropTypes.object,
         searching: PropTypes.bool
