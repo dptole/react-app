@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const RESULTS_PER_PAGE = 50
 
@@ -22,6 +23,23 @@ const MyAnimeListResponseComponent = props => {
   }
 
   return null
+}
+
+MyAnimeListResponseComponent.propTypes = {
+  hook: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        search_type: PropTypes.oneOf(['manga', 'anime']),
+        search: PropTypes.string,
+        output: PropTypes.object,
+        searching: PropTypes.bool
+      }),
+      PropTypes.shape({
+        doPaginatedSearch: PropTypes.func,
+        newSearch: PropTypes.func
+      })
+    ])
+  )
 }
 
 const isErrorResponse = response =>

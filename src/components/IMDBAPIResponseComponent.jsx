@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const RESULTS_PER_PAGE = 10
 
@@ -22,6 +23,22 @@ const IMDBAPIResponseComponent = props => {
   }
 
   return null
+}
+
+IMDBAPIResponseComponent.propTypes = {
+  hook: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        page: PropTypes.number,
+        output: PropTypes.string,
+        searching: PropTypes.bool
+      }),
+      PropTypes.shape({
+        doPaginatedSearch: PropTypes.func,
+        newSearch: PropTypes.func
+      })
+    ])
+  )
 }
 
 const isErrorResponse = response =>
