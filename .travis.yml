@@ -11,7 +11,7 @@ before_install:
   - yarn
 
 script:
-  - yarn test -- --coverage --watchAll=false
+  - yarn test --coverage --watchAll=false
 
 after_script:
   - yarn codecov

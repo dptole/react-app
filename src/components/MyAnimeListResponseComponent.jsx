@@ -13,7 +13,7 @@ const MyAnimeListResponseComponent = props => {
       return successResponse(output, search_type, page, searching, onPaginatedSearch, onNewSearch)
 
     else if(isErrorResponse(output))
-      return errorResponse(output)
+      return errorResponse({message: 'No results', ...output})
 
     else if(Object.keys(output).length > 0)
       return (

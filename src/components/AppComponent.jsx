@@ -1,11 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom'
 import '../assets/css/App.css'
-import ClicksComponent from './ClicksComponent'
-import IMDBComponent from './IMDBComponent'
 import HomeComponent from './HomeComponent'
-import MyAnimeListComponent from './MyAnimeListComponent'
-import ProgrammingQuotesComponent from './ProgrammingQuotesComponent'
+
+const ClicksComponent = React.lazy(() => import(/* webpackChunkName: 'ClicksComponent' */ './ClicksComponent'))
+const IMDBComponent = React.lazy(() => import(/* webpackChunkName: 'IMDBComponent' */ './IMDBComponent'))
+const MyAnimeListComponent = React.lazy(() => import(/* webpackChunkName: 'MyAnimeListComponent' */ './MyAnimeListComponent'))
+const ProgrammingQuotesComponent = React.lazy(() => import(/* webpackChunkName: 'ProgrammingQuotesComponent' */ './ProgrammingQuotesComponent'))
+
+const LoadingComponent = <h1 className="text-center">Loading...</h1>
 
 const AppComponent = () => {
   return (
@@ -35,13 +38,15 @@ const AppComponent = () => {
 
       <div className="container">
         <Switch>
-          <Route exact path="/react-app" component={HomeComponent} />
-          <Route path="/react-app/clicks" component={ClicksComponent} />
-          <Route path="/react-app/imdb" component={IMDBComponent} />
-          <Route path="/react-app/mal" component={MyAnimeListComponent} />
-          <Route path="/react-app/progq" component={ProgrammingQuotesComponent} />
+          <React.Suspense fallback={LoadingComponent}>
+            <Route exact path="/react-app" component={HomeComponent} />
+            <Route path="/react-app/clicks" component={ClicksComponent} />
+            <Route path="/react-app/imdb" component={IMDBComponent} />
+            <Route path="/react-app/mal" component={MyAnimeListComponent} />
+            <Route path="/react-app/progq" component={ProgrammingQuotesComponent} />
 
-          <Redirect from="*" to="/react-app" />
+            <Redirect from="*" to="/react-app" />
+          </React.Suspense>
         </Switch>
       </div>
 
