@@ -36,6 +36,7 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
+      "<rootDir>/src/assets/",
       "<rootDir>/src/tests/",
       "<rootDir>/src/index.jsx",
       "<rootDir>/src/serviceWorker.js"
