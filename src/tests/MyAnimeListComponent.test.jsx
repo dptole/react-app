@@ -29,13 +29,13 @@ describe('MyAnimeListComponent', () => {
     expect(container.innerHTML).toMatch('Search for manga')
   })
 
-  test('should run invalid search', async () => {
+  test('should run empty search', async () => {
     const { container, getByText } = render(<MyAnimeListComponent />)
     const submit_button = getByText('Search for anime')
 
     await fireEvent.click(submit_button)
 
-    await wait(() => expect(container.innerHTML).toMatch('Error!'))
+    await wait(() => expect(container.innerHTML).toMatch('Success!'))
   }, SEARCHES_WAIT)
 
   test('should search for "piece" on anime and paginate', async () => {
