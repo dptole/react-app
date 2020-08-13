@@ -39,7 +39,7 @@ describe('IMDBComponent', () => {
   }, SEARCHES_WAIT)
 
   IMDB_API_KEY &&
-  test('should search for "jorker" and "bird" and then "New search"', async () => {
+  test('should search for "joker" and "bird" and then "New search"', async () => {
     const { container, getByText } = render(<IMDBComponent />)
     const apikey_box = container.querySelector('input[type=text]#imdb_apikey')
     const search_box = container.querySelector('input[type=text]#imdb_search')
