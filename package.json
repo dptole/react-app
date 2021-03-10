@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "acorn": "^7.1.1",
     "codecov": "^3.7.1",
-    "elliptic": "^6.5.3",
+    "elliptic": "^6.5.4",
     "lodash": "^4.17.19",
     "minimist": "^1.2.3",
     "node-forge": "^0.10.0",
